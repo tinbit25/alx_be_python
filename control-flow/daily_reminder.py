@@ -1,21 +1,26 @@
+import os
+
+def check_file(file_path):
+    if os.path.exists(file_path):
+        if os.path.getsize(file_path) > 0:
+            print(f"The file '{file_path}' exists and is not empty.")
+        else:
+            print(f"The file '{file_path}' exists but is empty.")
+    else:
+        print(f"The file '{file_path}' does not exist.")
+
 def get_user_input():
     task = input("Enter your task: ").strip()
-    
-    # Ensure the task is not empty
     if not task:
         print("Task cannot be empty.")
         return None, None, None
 
     priority = input("Priority (high, medium, low): ").strip().lower()
-    
-    # Ensure the priority is valid
     if priority not in ["high", "medium", "low"]:
         print("Invalid priority level. Please specify high, medium, or low.")
         return None, None, None
 
     time_bound = input("Is it time-bound? (yes or no): ").strip().lower()
-
-    # Ensure time_bound is valid
     if time_bound not in ["yes", "no"]:
         print("Invalid response for time-bound. Please answer with 'yes' or 'no'.")
         return None, None, None
@@ -49,4 +54,6 @@ def main():
         print(reminder)
 
 if __name__ == "__main__":
+  
+    check_file("example_file.txt")  # 
     main()
