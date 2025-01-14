@@ -8,11 +8,11 @@ def display_menu():
 
 def main():
     """Main function to manage the shopping list."""
-    shopping_list = []  # Start with an empty list
+    shopping_list = []  # Initialize shopping_list as an empty list
 
     while True:
-        display_menu()  # Display menu
-        choice = input("Enter your choice: ")  # Handle input as a string
+        display_menu()  # Call the display_menu function
+        choice = input("Enter your choice: ")  # Accept user input as a string
 
         if choice == '1':  # Add item
             item = input("Enter the item to add: ")
