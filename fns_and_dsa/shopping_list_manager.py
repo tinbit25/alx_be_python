@@ -12,14 +12,18 @@ def main():
 
     while True:
         display_menu()  # Display menu
-        choice = input("Enter your choice: ")  # Get user input
+        try:
+            choice = int(input("Enter your choice: "))  # Convert input to integer
+        except ValueError:
+            print("Invalid input. Please enter a number between 1 and 4.")
+            continue
 
-        if choice == '1':  # Add item
+        if choice == 1:  # Add item
             item = input("Enter the item to add: ")
             shopping_list.append(item)
             print(f"'{item}' has been added to the list.")
 
-        elif choice == '2':  # Remove item
+        elif choice == 2:  # Remove item
             item = input("Enter the item to remove: ")
             if item in shopping_list:
                 shopping_list.remove(item)
@@ -27,7 +31,7 @@ def main():
             else:
                 print(f"'{item}' not found in the list.")
 
-        elif choice == '3':  # View list
+        elif choice == 3:  # View list
             if shopping_list:
                 print("\nCurrent Shopping List:")
                 for i, item in enumerate(shopping_list, start=1):
@@ -35,12 +39,12 @@ def main():
             else:
                 print("Your shopping list is empty.")
 
-        elif choice == '4':  # Exit
+        elif choice == 4:  # Exit
             print("Goodbye!")
             break
 
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Please enter a number between 1 and 4.")
 
 if __name__ == "__main__":
     main()
