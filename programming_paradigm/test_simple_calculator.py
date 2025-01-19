@@ -20,11 +20,11 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.subtract(0, 0), 0)
 
     def test_multiply(self):
-    self.assertEqual(self.calc.multiply(2, 3), 6)  # Basic multiplication
-    self.assertEqual(self.calc.multiply(-2, 3), -6)  # Negative number
-    self.assertEqual(self.calc.multiply(0, 5), 0)  # Multiplying by zero
-    self.assertEqual(self.calc.multiply(-2, -3), 6)  # Multiplying two negative numbers
-
+        """Test the multiplication method."""
+        self.assertEqual(self.calc.multiply(2, 3), 6)  # Basic multiplication
+        self.assertEqual(self.calc.multiply(-2, 3), -6)  # Negative number
+        self.assertEqual(self.calc.multiply(0, 5), 0)  # Multiplying by zero
+        self.assertEqual(self.calc.multiply(-2, -3), 6)  # Multiplying two negative numbers
 
     def test_divide(self):
         """Test the divide method."""
