@@ -1,6 +1,6 @@
 # Define Global Conversion Factors
-CELSIUS_TO_FAHRENHEIT_FACTOR = 9 / 5
-FAHRENHEIT_TO_CELSIUS_FACTOR = 5 / 9
+CELSIUS_TO_FAHRENHEIT_FACTOR = 9/5
+FAHRENHEIT_TO_CELSIUS_FACTOR = 5/9
 
 def convert_to_celsius(fahrenheit):
     """Convert Fahrenheit to Celsius."""
@@ -13,28 +13,28 @@ def convert_to_fahrenheit(celsius):
 def main():
     try:
         # Prompt user for temperature input
-        temp_input = input("Enter a temperature value: ").strip()
+        temp_input = input("Enter the temperature to convert: ").strip()
         
         # Validate the temperature input
-        if not temp_input.replace('.', '', 1).replace('-', '', 1).isdigit():
-            raise ValueError("Invalid temperature value. Please enter a valid number.")
+        if not temp_input.lstrip('-').replace('.', '', 1).isdigit():
+            raise ValueError("Invalid temperature. Please enter a numeric value.")
         
         temperature = float(temp_input)
 
         # Prompt user for unit
-        unit = input("Enter the unit of temperature (C for Celsius, F for Fahrenheit): ").strip().upper()
+        unit = input("Is the temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
         
-        # Validate the unit input and perform the conversion
+        # Validate the unit input
         if unit == 'F':
             converted_temp = convert_to_celsius(temperature)
-            print(f"{temperature} in Fahrenheit is {converted_temp:.2f} Celsius.")
+            print(f"{temperature}°F is {converted_temp:.2f}°C")
         elif unit == 'C':
             converted_temp = convert_to_fahrenheit(temperature)
-            print(f"{temperature} in Celsius is {converted_temp:.2f} Fahrenheit.")
+            print(f"{temperature}°C is {converted_temp:.2f}°F")
         else:
-            raise ValueError("Invalid unit of temperature. Please enter 'C' or 'F'.")
+            raise ValueError("Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit.")
     except ValueError as e:
-        print(e)
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()
