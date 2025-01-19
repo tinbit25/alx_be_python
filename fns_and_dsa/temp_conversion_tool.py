@@ -22,6 +22,7 @@ def main():
                 print("Exiting the temperature conversion tool.")
                 break  # Exit the loop if the user types 'exit'
                 
+            # Validate and convert the input to float
             temperature = float(temperature)
             unit = input("Is this temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
 
