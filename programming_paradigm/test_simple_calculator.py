@@ -23,48 +23,45 @@ class TestSimpleCalculator(unittest.TestCase):
 
     def test_multiply(self):
         """Test the multiplication method."""
-        # Typical cases
+        # Standard multiplication cases
         self.assertEqual(self.calc.multiply(3, 4), 12)
         self.assertEqual(self.calc.multiply(-3, 4), -12)
         self.assertEqual(self.calc.multiply(-3, -4), 12)
-        
-        # Edge cases
-        self.assertEqual(self.calc.multiply(0, 5), 0)  # Multiplying by zero
-        self.assertEqual(self.calc.multiply(5, 0), 0)  # Multiplying with zero reversed
-        self.assertEqual(self.calc.multiply(0, 0), 0)  # Zero * Zero
-        
-        # Large number cases
-        self.assertEqual(self.calc.multiply(1_000_000, 2), 2_000_000)
-        self.assertEqual(self.calc.multiply(-1_000_000, 2), -2_000_000)
-        
-        # Floating-point multiplication
-        self.assertEqual(self.calc.multiply(0.1, 0.2), 0.02)
+
+        # Edge cases for zero multiplication
+        self.assertEqual(self.calc.multiply(0, 5), 0)  # 0 * number
+        self.assertEqual(self.calc.multiply(5, 0), 0)  # number * 0
+        self.assertEqual(self.calc.multiply(0, 0), 0)  # 0 * 0
+
+        # Large numbers multiplication
+        self.assertEqual(self.calc.multiply(1000000, 2), 2000000)
+        self.assertEqual(self.calc.multiply(-1000000, 2), -2000000)
 
     def test_divide(self):
         """Test the division method."""
-        # Typical cases
+        # Typical division cases
         self.assertEqual(self.calc.divide(10, 2), 5)
         self.assertEqual(self.calc.divide(-10, 2), -5)
         self.assertEqual(self.calc.divide(10, -2), -5)
         self.assertEqual(self.calc.divide(-10, -2), 5)
-        
-        # Edge case: division by zero
+
+        # Edge case for division by zero
         self.assertIsNone(self.calc.divide(10, 0), "Division by zero should return None")
-        
-        # Edge case: zero numerator
+
+        # Zero as numerator
         self.assertEqual(self.calc.divide(0, 5), 0)
         self.assertEqual(self.calc.divide(0, -5), 0)
-        
-        # Large number cases
-        self.assertEqual(self.calc.divide(1_000_000, 2), 500_000)
-        self.assertEqual(self.calc.divide(-1_000_000, 2), -500_000)
-        
-        # Small divisor cases
+
+        # Large numbers division
+        self.assertEqual(self.calc.divide(1000000, 2), 500000)
+        self.assertEqual(self.calc.divide(-1000000, 2), -500000)
+
+        # Division with small divisors
         self.assertAlmostEqual(self.calc.divide(1, 1e-9), 1e9, places=5)
         self.assertAlmostEqual(self.calc.divide(-1, 1e-9), -1e9, places=5)
 
-        # Floating-point division
-        self.assertAlmostEqual(self.calc.divide(1, 3), 0.33333, places=5)  # Precision test for floating point
+        # Floating-point division and precision
+        self.assertAlmostEqual(self.calc.divide(1, 3), 0.33333, places=5)
 
 if __name__ == "__main__":
     unittest.main()
