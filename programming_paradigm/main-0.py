@@ -31,7 +31,7 @@ def main():
         except ValueError as e:
             print(e)
     elif command == "display":
-        print(account.display_balance())
+        account.display_balance()
     else:
         print("Invalid command.")
 

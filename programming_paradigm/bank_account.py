@@ -25,5 +25,5 @@ class BankAccount:
             raise ValueError("Withdrawal amount must be positive.")
 
     def display_balance(self):
-        """Return the current balance in a formatted string."""
-        return f"Current Balance: ${self._account_balance:.2f}"
+        """Print the current balance in the expected test output format."""
+        print(f"Current Balance: ${self._account_balance:.2f}")
