@@ -1,40 +1,49 @@
-# Define Global Conversion Factors
-CELSIUS_TO_FAHRENHEIT_FACTOR = 9/5
-FAHRENHEIT_TO_CELSIUS_FACTOR = 5/9
+import unittest
+from simple_calculator import SimpleCalculator
 
-def convert_to_celsius(fahrenheit):
-    """Convert Fahrenheit to Celsius."""
-    return (fahrenheit - 32) * FAHRENHEIT_TO_CELSIUS_FACTOR
+class TestSimpleCalculator(unittest.TestCase):
 
-def convert_to_fahrenheit(celsius):
-    """Convert Celsius to Fahrenheit."""
-    return (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + 32
+    def setUp(self):
+        """Set up the SimpleCalculator instance before each test."""
+        self.calc = SimpleCalculator()
 
-def main():
-    try:
-        # Prompt user for temperature input
-        temp_input = input("Enter the temperature to convert: ").strip()
+    def test_addition(self):
+        """Test the addition method."""
+        self.assertEqual(self.calc.add(2, 3), 5)
+        self.assertEqual(self.calc.add(-1, 1), 0)
+        self.assertEqual(self.calc.add(0, 0), 0)
+        self.assertEqual(self.calc.add(-5, -3), -8)
+
+    def test_subtraction(self):
+        """Test the subtraction method."""
+        self.assertEqual(self.calc.subtract(10, 5), 5)
+        self.assertEqual(self.calc.subtract(0, 5), -5)
+        self.assertEqual(self.calc.subtract(-5, -5), 0)
+        self.assertEqual(self.calc.subtract(100, 50), 50)
+
+    def test_multiply(self):
+        """Test the multiplication method."""
+        self.assertEqual(self.calc.multiply(3, 4), 12)
+        self.assertEqual(self.calc.multiply(-3, 4), -12)
+        self.assertEqual(self.calc.multiply(0, 5), 0)  # Edge case: multiplying by zero
+        self.assertEqual(self.calc.multiply(-3, -4), 12)  # Multiplying negatives
+
+    def test_divide(self):
+        """Test the division method."""
+        self.assertEqual(self.calc.divide(10, 2), 5)
+        self.assertEqual(self.calc.divide(-10, 2), -5)
+        self.assertEqual(self.calc.divide(10, -2), -5)
+        self.assertEqual(self.calc.divide(-10, -2), 5)
+
+        # Edge case: dividing by zero
+        self.assertIsNone(self.calc.divide(10, 0), "Division by zero should return None")
         
-        # Validate the temperature input
-        if not temp_input.lstrip('-').replace('.', '', 1).isdigit():
-            raise ValueError("Invalid temperature. Please enter a numeric value.")
-        
-        temperature = float(temp_input)
+        # Edge case: very small divisor
+        self.assertAlmostEqual(self.calc.divide(1, 1e-9), 1e9, places=2)
 
-        # Prompt user for unit
-        unit = input("Is the temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
-        
-        # Validate the unit input
-        if unit == 'F':
-            converted_temp = convert_to_celsius(temperature)
-            print(f"{temperature}°F is {converted_temp:.2f}°C")
-        elif unit == 'C':
-            converted_temp = convert_to_fahrenheit(temperature)
-            print(f"{temperature}°C is {converted_temp:.2f}°F")
-        else:
-            raise ValueError("Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit.")
-    except ValueError as e:
-        print(f"Error: {e}")
+    def test_combined(self):
+        """Additional tests to verify combined behaviors."""
+        self.assertEqual(self.calc.add(self.calc.multiply(2, 3), self.calc.divide(10, 2)), 11)
 
 if __name__ == "__main__":
-    main()
+    unittest.main()
