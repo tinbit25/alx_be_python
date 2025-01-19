@@ -1,3 +1,5 @@
+# test_simple_calculator.py
+
 import unittest
 from simple_calculator import SimpleCalculator
 
@@ -29,7 +31,7 @@ class TestSimpleCalculator(unittest.TestCase):
         """Test the division method."""
         self.assertEqual(self.calc.divide(10, 2), 5)
         self.assertEqual(self.calc.divide(-10, 2), -5)
-        self.assertEqual(self.calc.divide(10, 0), None)  # Test division by zero
+        self.assertIsNone(self.calc.divide(10, 0))  # Check for division by zero
 
 if __name__ == "__main__":
     unittest.main()
