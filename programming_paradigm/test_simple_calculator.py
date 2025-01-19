@@ -23,27 +23,42 @@ class TestSimpleCalculator(unittest.TestCase):
 
     def test_multiply(self):
         """Test the multiplication method."""
+        # Typical cases
         self.assertEqual(self.calc.multiply(3, 4), 12)
         self.assertEqual(self.calc.multiply(-3, 4), -12)
-        self.assertEqual(self.calc.multiply(0, 5), 0)  # Edge case: multiplying by zero
-        self.assertEqual(self.calc.multiply(-3, -4), 12)  # Multiplying negatives
+        self.assertEqual(self.calc.multiply(-3, -4), 12)
+
+        # Edge cases
+        self.assertEqual(self.calc.multiply(0, 5), 0)  # Multiplying by zero
+        self.assertEqual(self.calc.multiply(5, 0), 0)  # Multiplying with zero reversed
+        self.assertEqual(self.calc.multiply(0, 0), 0)  # Zero * Zero
+
+        # Large number cases
+        self.assertEqual(self.calc.multiply(1_000_000, 2), 2_000_000)
+        self.assertEqual(self.calc.multiply(-1_000_000, 2), -2_000_000)
 
     def test_divide(self):
         """Test the division method."""
+        # Typical cases
         self.assertEqual(self.calc.divide(10, 2), 5)
         self.assertEqual(self.calc.divide(-10, 2), -5)
         self.assertEqual(self.calc.divide(10, -2), -5)
         self.assertEqual(self.calc.divide(-10, -2), 5)
 
-        # Edge case: dividing by zero
+        # Edge case: division by zero
         self.assertIsNone(self.calc.divide(10, 0), "Division by zero should return None")
-        
-        # Edge case: very small divisor
-        self.assertAlmostEqual(self.calc.divide(1, 1e-9), 1e9, places=2)
 
-    def test_combined(self):
-        """Additional tests to verify combined behaviors."""
-        self.assertEqual(self.calc.add(self.calc.multiply(2, 3), self.calc.divide(10, 2)), 11)
+        # Edge case: zero numerator
+        self.assertEqual(self.calc.divide(0, 5), 0)
+        self.assertEqual(self.calc.divide(0, -5), 0)
+
+        # Large number cases
+        self.assertAlmostEqual(self.calc.divide(1_000_000, 2), 500_000)
+        self.assertAlmostEqual(self.calc.divide(-1_000_000, 2), -500_000)
+
+        # Small divisor cases
+        self.assertAlmostEqual(self.calc.divide(1, 1e-9), 1e9, places=5)
+        self.assertAlmostEqual(self.calc.divide(-1, 1e-9), -1e9, places=5)
 
 if __name__ == "__main__":
     unittest.main()
