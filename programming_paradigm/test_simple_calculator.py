@@ -20,6 +20,10 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.add(0, 5), 5)
         # Floating-point addition
         self.assertEqual(self.calc.add(5.5, 4.5), 10.0)
+        # Addition with large numbers
+        self.assertEqual(self.calc.add(1e10, 1e10), 2e10)
+        # Add negative with a large number
+        self.assertEqual(self.calc.add(-1e10, 1e10), 0)
 
     def test_subtract(self):
         """Test the subtraction method."""
@@ -33,6 +37,10 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.subtract(5, 0), 5)
         # Floating-point subtraction
         self.assertEqual(self.calc.subtract(5.5, 4.5), 1.0)
+        # Subtract large numbers
+        self.assertEqual(self.calc.subtract(1e10, 1e10), 0)
+        # Subtract negative from a positive
+        self.assertEqual(self.calc.subtract(10, -5), 15)
 
     def test_multiply(self):
         """Test the multiplication method."""
@@ -46,6 +54,10 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.multiply(3, 0), 0)
         # Floating-point multiplication
         self.assertEqual(self.calc.multiply(3.5, 2), 7.0)
+        # Multiplying large numbers
+        self.assertEqual(self.calc.multiply(1e5, 1e5), 1e10)
+        # Multiplying a number with 1
+        self.assertEqual(self.calc.multiply(5, 1), 5)
 
     def test_divide(self):
         """Test the division method."""
@@ -61,10 +73,13 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.divide(5.5, 2.2), 2.5)
         # Zero numerator
         self.assertEqual(self.calc.divide(0, 5), 0.0)
-
         # Division by zero
         self.assertIsNone(self.calc.divide(10, 0), "Expected None for division by zero.")
         self.assertIsNone(self.calc.divide(0, 0), "Expected None for 0 divided by 0.")
+        # Division with large numbers
+        self.assertEqual(self.calc.divide(1e10, 1e5), 1e5)
+        # Division by negative numbers
+        self.assertEqual(self.calc.divide(10, -2), -5)
 
     def test_edge_cases(self):
         """Test additional edge cases."""
