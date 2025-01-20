@@ -37,7 +37,7 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.multiply(1000000, 2), 2000000)
         self.assertEqual(self.calc.multiply(-1000000, 2), -2000000)
 
-    def test_divide(self):
+    def test_division(self):
         """Test the division method."""
         # Typical division cases
         self.assertEqual(self.calc.divide(10, 2), 5)
