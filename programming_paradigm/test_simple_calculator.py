@@ -21,7 +21,7 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.subtract(-5, -5), 0)
         self.assertEqual(self.calc.subtract(100, 50), 50)
 
-    def test_multiply(self):
+    def test_multiplication(self):
         """Test the multiplication method."""
         # Standard multiplication cases
         self.assertEqual(self.calc.multiply(3, 4), 12)
@@ -46,7 +46,8 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.divide(-10, -2), 5)
 
         # Edge case for division by zero
-        self.assertIsNone(self.calc.divide(10, 0), "Division by zero should return None")
+        with self.assertRaises(ValueError):  # Updated to raise an exception for divide by zero
+            self.calc.divide(10, 0)
 
         # Zero as numerator
         self.assertEqual(self.calc.divide(0, 5), 0)
