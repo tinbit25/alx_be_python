@@ -3,31 +3,35 @@ from simple_calculator import SimpleCalculator
 
 class TestSimpleCalculator(unittest.TestCase):
     def setUp(self):
-        """Initialize the calculator instance before each test."""
+        """Set up a SimpleCalculator instance for testing."""
         self.calculator = SimpleCalculator()
 
     def test_addition(self):
-        """Test the add method."""
-        self.assertEqual(self.calculator.add(2, 3), 5)
+        """Test addition functionality."""
+        self.assertEqual(self.calculator.add(1, 1), 2)
         self.assertEqual(self.calculator.add(-1, -1), -2)
         self.assertEqual(self.calculator.add(0, 5), 5)
+        self.assertEqual(self.calculator.add(2.5, 2.5), 5.0)
 
     def test_subtraction(self):
-        """Test the subtract method."""
-        self.assertEqual(self.calculator.subtract(5, 3), 2)
-        self.assertEqual(self.calculator.subtract(0, 4), -4)
-        self.assertEqual(self.calculator.subtract(10, 10), 0)
+        """Test subtraction functionality."""
+        self.assertEqual(self.calculator.subtract(10, 5), 5)
+        self.assertEqual(self.calculator.subtract(-1, -1), 0)
+        self.assertEqual(self.calculator.subtract(0, 5), -5)
+        self.assertEqual(self.calculator.subtract(2.5, 0.5), 2.0)
 
     def test_multiplication(self):
-        """Test the multiply method."""
-        self.assertEqual(self.calculator.multiply(2, 3), 6)
-        self.assertEqual(self.calculator.multiply(-1, 5), -5)
-        self.assertEqual(self.calculator.multiply(0, 5), 0)
+        """Test multiplication functionality."""
+        self.assertEqual(self.calculator.multiply(3, 3), 9)
+        self.assertEqual(self.calculator.multiply(-1, 1), -1)
+        self.assertEqual(self.calculator.multiply(0, 10), 0)
+        self.assertEqual(self.calculator.multiply(2.5, 2), 5.0)
 
-    def test_division(self):
-        """Test the divide method."""
-        self.assertEqual(self.calculator.divide(6, 3), 2)
+    def test_divide(self):
+        """Test division functionality."""
         self.assertEqual(self.calculator.divide(10, 2), 5)
+        self.assertEqual(self.calculator.divide(-10, -2), 5)
+        self.assertEqual(self.calculator.divide(2.5, 0.5), 5.0)
         with self.assertRaises(ValueError):  # Ensure division by zero raises an error
             self.calculator.divide(5, 0)
 
