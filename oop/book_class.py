@@ -17,9 +17,4 @@ class Book:
         """Return an official string representation of the book."""
         return f"Book('{self.title}', '{self.author}', {self.year})"
 
-# If you want to include a main section for testing within this file, you can uncomment below:
-# if __name__ == "__main__":
-#     my_book = Book("1984", "George Orwell", 1949)
-#     print(my_book)  # Expected to use __str__
-#     print(repr(my_book))  # Expected to use __repr__
-#     del my_book
+#
